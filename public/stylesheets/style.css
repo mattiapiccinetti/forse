@@ -1,0 +1,34 @@
+* {
+	margin: 0 auto;
+	font-family: Courier;
+	text-align: center;
+	color: #333; 
+} 
+
+.wrapper {
+	height: 80%;
+	display: table;
+} 
+
+div.wrapper > a {
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 24px;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.social {
+	height: 5%;
+}
+
+.footer {
+	height: 15%;
+	display: table;
+	font-size: 11px;	
+}
+
+div.footer > p {
+	display: table-cell;
+	vertical-align: middle;
+}
