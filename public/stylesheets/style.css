@@ -2,13 +2,13 @@
 	margin: 0 auto;
 	font-family: Courier;
 	text-align: center;
-	color: #333; 
-} 
+	color: #333;
+}
 
 .wrapper {
-	height: 80%;
+	height: 85%;
 	display: table;
-} 
+}
 
 div.wrapper > a {
 	display: table-cell;
@@ -23,9 +23,9 @@ div.wrapper > a {
 }
 
 .footer {
-	height: 15%;
+	height: 10%;
 	display: table;
-	font-size: 11px;	
+	font-size: 11px;
 }
 
 div.footer > p {
