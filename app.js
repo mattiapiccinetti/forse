@@ -34,7 +34,7 @@ app.get('/api/tips/random', function(request, response) {
 	    }
 
       response.send(result.rows[Math.floor(Math.random() * result.rows.length)])
-     });
+    });
   });
 });
 
@@ -52,6 +52,6 @@ app.get('/api/tips', function(request, response) {
 	    }
 
       response.send(result.rows);
-     });
+    });
   });
 });
