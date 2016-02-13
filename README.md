@@ -8,4 +8,4 @@ Just for fun in the office, just playing with Node on Heroku
 
 ## See it in action
 
-Go to http://forse.herokyapp.com
+Go to http://forse.herokuapp.com
