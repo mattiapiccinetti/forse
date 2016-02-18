@@ -16,7 +16,13 @@
             tip.fadeOut(200, function () {
               tip.html(data.tip).fadeIn(200);
             });
-          });  
+          })
+          .fail(function() {
+            var tip = $("#tip");
+            tip.fadeOut(200, function () {
+              tip.html("forse non funziona").fadeIn(200);
+            });
+          });;  
         }
       });
     </script>
