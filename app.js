@@ -7,7 +7,7 @@ var app = express();
 var conString = process.env.DATABASE_URL;
 
 app.use('/public', express.static('public'));
-app.engine('.hbs', exphbs({defaultLayout: 'index', extname: '.hbs'}));
+app.engine('.hbs', exphbs({extname: '.hbs'}));
 app.set('view engine', '.hbs');
 app.set('port', (process.env.PORT || 5000));
 
@@ -18,6 +18,10 @@ app.listen(app.get('port'), function() {
 
 app.get('/', function(request, response) {  
 	response.render('layouts/index');
+});
+
+app.get('/admin', function(request, response) {  
+	response.render('layouts/admin');
 });
 
 app.get('/api/tips/random', function(request, response) {
