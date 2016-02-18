@@ -6,25 +6,31 @@
     {{> footer}}
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script>
-      $(document).on('ready click keydown', function (e) {
-        if ($.inArray(e.keyCode, [0, 13, 32])) {
-          $.ajax({
-            url: "http://forse.herokuapp.com/api/tips/random"
-          })
-          .done(function(data) {
-            var tip = $("#tip");
-            tip.fadeOut(200, function () {
-              tip.html(data.tip).fadeIn(200);
-            });
-          })
-          .fail(function() {
-            var tip = $("#tip");
-            tip.fadeOut(200, function () {
-              tip.html("forse non funziona").fadeIn(200);
-            });
-          });;  
-        }
-      });
+      var getTip = function() {
+        $.ajax({
+          url: "http://forse.herokuapp.com/api/tips/random"
+        })
+        .done(function(data) {
+          var tip = $("#tip");
+          tip.fadeOut(200, function () {
+            tip.html(data.tip).fadeIn(200);
+          });
+        })
+        .fail(function() {
+          var tip = $("#tip");
+          tip.fadeOut(200, function () {
+            tip.html("forse non funziona").fadeIn(200);
+          });
+        });  
+      }
+      $(document)
+        .on('ready click', getTip)
+        .keydown(function(e) {
+          if (e.keyCode == 13 || e.keyCode == 32) {
+            console.log(e.keyCode);
+            getTip();
+          }
+        });
     </script>
     {{> analytics}}
   </body>
