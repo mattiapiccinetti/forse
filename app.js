@@ -16,7 +16,7 @@ app.listen(app.get('port'), function() {
   console.log('Forse server is listening on port', app.get('port'));
 });
 
-app.get('/', function(req, res) {  
+app.get('/', function(req, res) {
 	res.render('layouts/index');
 });
 
@@ -40,12 +40,15 @@ app.get('/api/tips/random', function(req, res) {
 });
 
 app.get('/api/tips/:id(\\d+)', function(req, res) {
+	
+	var id = req.params.id;
+
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
   	}
-  	console.log('req.params.id = ' + req.params.id)
-	  client.query('SELECT * FROM tips where id = $1', [req.params.id], function(err, result) {
+	  
+	  client.query('SELECT * FROM tips where id = $1', [id], function(err, result) {
 	  	done();
 	  	
 	  	if(err) {
