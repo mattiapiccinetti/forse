@@ -44,7 +44,7 @@ app.get('/api/tips/:id(\\d+)', function(req, res) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
   	}
-
+  	console.log('req.params.id = ' + req.params.id)
 	  client.query('SELECT * FROM tips where id = $1', [req.params.id], function(err, result) {
 	  	done();
 	  	
