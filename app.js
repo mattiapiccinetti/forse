@@ -55,7 +55,7 @@ app.get('/api/tips/:id(\\d+)', function(req, res) {
 	    	return console.error(err);
 	    }
 
-      res.send(result.rows);
+      res.send(result.rows[0]);
     });
   });
 });
