@@ -16,12 +16,12 @@ app.listen(app.get('port'), function() {
   console.log('Forse server is listening on port', app.get('port'));
 });
 
-app.get('/', function(request, response) {  
-	response.render('layouts/index');
+app.get('/', function(req, res) {  
+	res.render('layouts/index');
 });
 
 
-app.get('/api/tips/random', function(request, response) {
+app.get('/api/tips/random', function(req, res) {
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
@@ -34,12 +34,12 @@ app.get('/api/tips/random', function(request, response) {
 	    	return console.error(err);
 	    }
 
-      response.send(result.rows[Math.floor(Math.random() * result.rows.length)])
+      res.send(result.rows[Math.floor(Math.random() * result.rows.length)])
     });
   });
 });
 
-app.get('/api/tips/:id', function(request, response) {
+app.get('/api/tips/:id', function(req, res) {
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
@@ -52,12 +52,12 @@ app.get('/api/tips/:id', function(request, response) {
 	    	return console.error(err);
 	    }
 
-      response.send(result.rows);
+      res.send(result.rows);
     });
   });
 });
 
-app.get('/api/tips', function(request, response) {
+app.get('/api/tips', function(req, res) {
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
@@ -70,7 +70,7 @@ app.get('/api/tips', function(request, response) {
 	    	return console.error(err);
 	    }
 
-      response.send(result.rows);
+      res.send(result.rows);
     });
   });
 });
