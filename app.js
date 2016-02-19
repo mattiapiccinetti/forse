@@ -20,9 +20,6 @@ app.get('/', function(request, response) {
 	response.render('layouts/index');
 });
 
-app.get('/admin', function(request, response) {  
-	response.render('layouts/admin');
-});
 
 app.get('/api/tips/random', function(request, response) {
 	pg.connect(conString, function(err, client, done) {
@@ -38,6 +35,24 @@ app.get('/api/tips/random', function(request, response) {
 	    }
 
       response.send(result.rows[Math.floor(Math.random() * result.rows.length)])
+    });
+  });
+});
+
+app.get('/api/tips/:id', function(request, response) {
+	pg.connect(conString, function(err, client, done) {
+		if(err) {
+    	return console.error('error fetching client from pool', err);
+  	}
+
+	  client.query('SELECT * FROM tips where id = ' + req.params.id, function(err, result) {
+	  	done();
+	  	
+	  	if(err) {
+	    	return console.error(err);
+	    }
+
+      response.send(result.rows);
     });
   });
 });
