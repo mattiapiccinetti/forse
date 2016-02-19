@@ -5,6 +5,7 @@ var pg = require('pg');
 
 var app = express();
 var conString = process.env.DATABASE_URL;
+var secret = process.env.SUPER_MEGA_SECRET_TIP;
 
 app.use('/public', express.static('public'));
 app.engine('.hbs', exphbs({extname: '.hbs'}));
@@ -19,7 +20,6 @@ app.listen(app.get('port'), function() {
 app.get('/', function(req, res) {
 	res.render('layouts/index');
 });
-
 
 app.get('/api/tips/random', function(req, res) {
 	pg.connect(conString, function(err, client, done) {
