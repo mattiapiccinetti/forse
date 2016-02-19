@@ -39,13 +39,13 @@ app.get('/api/tips/random', function(req, res) {
   });
 });
 
-app.get('/api/tips/:id', function(req, res) {
+app.get('/api/tips/:id(\\d+)', function(req, res) {
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
   	}
 
-	  client.query('SELECT * FROM tips where id = ' + req.params.id, function(err, result) {
+	  client.query('SELECT * FROM tips where id = $1', [req.params.id], function(err, result) {
 	  	done();
 	  	
 	  	if(err) {
