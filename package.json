@@ -1,23 +1,24 @@
 {
   "name": "forse",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "forse non ho niente da fare",
-  "main": "index.js",
+  "description": "Forse non avevo proprio niente da fare",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./bin/www"
   },
   "repository": {
     "type": "git",
-    "url": "https://git.heroku.com/forse.git"
+    "url": "git@github.com:mattiapiccinetti/forse.git"
   },
   "keywords": [
-    "maybe"
+    "forse"
   ],
-  "author": "peachofpersia",
+  "author": "Mattia Piccinetti",
   "license": "ISC",
   "dependencies": {
-    "logfmt": "~1.2.0",
+    "debug": "~2.2.0",
+    "morgan": "~1.7.0",
     "express": "~4.13.4",
     "express-handlebars": "~3.0.0",
     "body-parser" : "~1.9.2",
