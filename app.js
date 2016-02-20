@@ -1,16 +1,19 @@
 var logfmt = require('logfmt');
 var express = require('express');
 var exphbs  = require('express-handlebars');
+var bodyParser = require('body-parser');
 var pg = require('pg');
-
 var app = express();
+
 var conString = process.env.DATABASE_URL;
-var secret = process.env.SUPER_MEGA_SECRET_TIP;
+var superMegaSecretTip = process.env.SUPER_MEGA_SECRET_TIP;
 
 app.engine('.hbs', exphbs({extname: '.hbs'}));
-app.use('/public', express.static('public'));
 app.set('port', (process.env.PORT || 5000));
 app.set('view engine', '.hbs');
+app.use('/public', express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 
 app.listen(app.get('port'), function() {
@@ -30,7 +33,7 @@ app.get('/api/tips/random', function(req, res) {
     	return console.error('error fetching client from pool', err);
   	}
 
-	  client.query('SELECT * FROM tips', function(err, result) {
+	  client.query('select * from tips', function(err, result) {
 	  	done();
 	  	
 	  	if(err) {
@@ -48,7 +51,7 @@ app.get('/api/tips/:id(\\d+)', function(req, res) {
     	return console.error('error fetching client from pool', err);
   	}
 	  
-	  client.query('SELECT * FROM tips where id = $1', [req.params.id], function(err, result) {
+	  client.query('select * from tips where id = $1', [req.params.id], function(err, result) {
 	  	done();
 	  	
 	  	if(err) {
@@ -61,12 +64,16 @@ app.get('/api/tips/:id(\\d+)', function(req, res) {
 });
 
 app.get('/api/tips', function(req, res) {
+	if (req.query.secret != superMegaSecretTip) {
+		return res.status(401).json({ message: 'forse non sei autorizzato' });
+	}
+	
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
   	}
 
-	  client.query('SELECT * FROM tips', function(err, result) {
+	  client.query('select * from tips order by id asc', function(err, result) {
 	  	done();
 	  	
 	  	if(err) {
@@ -74,6 +81,50 @@ app.get('/api/tips', function(req, res) {
 	    }
 
       res.send(result.rows);
+    });
+  });
+});
+
+app.post('/api/tips', function(req, res) {
+	if (req.query.secret != superMegaSecretTip) {
+		return res.status(401).json({ message: 'forse non sei autorizzato' });
+	}
+
+	pg.connect(conString, function(err, client, done) {
+		if(err) {
+    	return console.error('error fetching client from pool', err);
+  	}
+
+	  client.query('insert into tips(tip) values($1)', [req.body.tip], function(err, result) {
+	  	done();
+	  	
+	  	if(err) {
+	    	return console.error(err);
+	    }
+
+      res.status(201).json({ message: 'tip inserito forse con successo' });
+    });
+  });
+});
+
+app.put('/api/tips/:id(\\d+)', function(req, res) {
+	if (req.query.secret != superMegaSecretTip) {
+		return res.status(401).json({ message: 'forse non sei autorizzato' });
+	}
+
+	pg.connect(conString, function(err, client, done) {
+		if(err) {
+    	return console.error('error fetching client from pool', err);
+  	}
+
+	  client.query('update tips set tip = $1, created_at = now() where id = $2', [req.body.tip, req.params.id], function(err, result) {
+	  	done();
+	  	
+	  	if(err) {
+	    	return console.error(err);
+	    }
+
+      res.json({ message: 'tip aggiornato forse con successo' });
     });
   });
 });
