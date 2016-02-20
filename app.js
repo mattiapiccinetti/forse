@@ -7,10 +7,10 @@ var app = express();
 var conString = process.env.DATABASE_URL;
 var secret = process.env.SUPER_MEGA_SECRET_TIP;
 
-app.use('/public', express.static('public'));
 app.engine('.hbs', exphbs({extname: '.hbs'}));
-app.set('view engine', '.hbs');
+app.use('/public', express.static('public'));
 app.set('port', (process.env.PORT || 5000));
+app.set('view engine', '.hbs');
 
 
 app.listen(app.get('port'), function() {
@@ -18,7 +18,10 @@ app.listen(app.get('port'), function() {
 });
 
 app.get('/', function(req, res) {
-	res.render('layouts/index');
+	res.render('layouts/index', { 
+		apiEndpoint : req.protocol + '://' + req.headers.host + '/api/tips/random',
+		defaultTip : 'forse non funziona'
+	});
 });
 
 app.get('/api/tips/random', function(req, res) {
@@ -40,15 +43,12 @@ app.get('/api/tips/random', function(req, res) {
 });
 
 app.get('/api/tips/:id(\\d+)', function(req, res) {
-	
-	var id = req.params.id;
-
 	pg.connect(conString, function(err, client, done) {
 		if(err) {
     	return console.error('error fetching client from pool', err);
   	}
 	  
-	  client.query('SELECT * FROM tips where id = $1', [id], function(err, result) {
+	  client.query('SELECT * FROM tips where id = $1', [req.params.id], function(err, result) {
 	  	done();
 	  	
 	  	if(err) {

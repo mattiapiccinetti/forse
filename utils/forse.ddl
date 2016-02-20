@@ -16,7 +16,6 @@ insert into tips(tip) values('forse ho capito, ah no...');
 insert into tips(tip) values('forse devi fare refresh');
 insert into tips(tip) values('forse non hai riavviato');
 insert into tips(tip) values('forse non ha copiato il .war');
-
 insert into tips(tip) values('forse sono gli indici corrotti');
 insert into tips(tip) values('forse è come diceva @ziobrando');
 insert into tips(tip) values('forse è andato in timeout');
@@ -33,7 +32,6 @@ insert into tips(tip) values('forse si è inchiodato il berkeley');
 insert into tips(tip) values('forse è la vpn');
 insert into tips(tip) values('forse è il firewall');
 insert into tips(tip) values('forse non sei il prescelto');
-
 insert into tips(tip) values('forse non è la directory giusta');
 insert into tips(tip) values('forse è il garbage collector');
 insert into tips(tip) values('forse servivano solo 3 shard');
@@ -50,7 +48,6 @@ insert into tips(tip) values('forse non ha caricato il template');
 insert into tips(tip) values('forse è un problema di merge');
 insert into tips(tip) values('forse è un memory leak');
 insert into tips(tip) values('forse è un virus');
-
 insert into tips(tip) values('forse è asincrono');
 insert into tips(tip) values('forse hai sbagliato la password');
 insert into tips(tip) values('forse è un problema del load balancer');
@@ -67,7 +64,6 @@ insert into tips(tip) values('forse è una major version');
 insert into tips(tip) values('forse non è compatibile');
 insert into tips(tip) values('forse ci sta già lavorando qualcun altro');
 insert into tips(tip) values('forse hai piallato il db');
-
 insert into tips(tip) values('forse è colpa tua');
 insert into tips(tip) values('forse non è colpa tua');
 insert into tips(tip) values('forse no');
@@ -82,8 +78,7 @@ insert into tips(tip) values('forse va bene lo stesso');
 insert into tips(tip) values('forse va killato');
 insert into tips(tip) values('forse dovevi accorgertene prima');
 insert into tips(tip) values('forse dovresti fare una pausa');
-insert into tips(tip) values('forse è un sovrappallamento dello snado');
+insert into tips(tip) values('forse è un sovrallappamento dello snado');
 insert into tips(tip) values('forse non lo hai committato');
-
 insert into tips(tip) values('forse devi rivedere il tuo cv');
 insert into tips(tip) values('forse devi scappare in silenzio');

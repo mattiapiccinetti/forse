@@ -8,7 +8,7 @@
     <script>
       var getTip = function() {
         $.ajax({
-          url: "http://forse.herokuapp.com/api/tips/random"
+          url: "{{apiEndpoint}}"
         })
         .done(function(data) {
           var tip = $("#tip");
@@ -19,7 +19,7 @@
         .fail(function() {
           var tip = $("#tip");
           tip.fadeOut(200, function () {
-            tip.html("forse non funziona").fadeIn(200);
+            tip.html("{{defaultTip}}").fadeIn(200);
           });
         });  
       }
