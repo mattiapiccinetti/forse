@@ -6,17 +6,17 @@
     {{> footer}}
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script>
-      var getTip = function() {
+      var getTip = function () {
         $.ajax({
           url: "{{apiEndpoint}}"
         })
-        .done(function(data) {
+        .done(function (data) {
           var tip = $("#tip");
           tip.fadeOut(200, function () {
             tip.html(data.tip).fadeIn(200);
           });
         })
-        .fail(function() {
+        .fail(function () {
           var tip = $("#tip");
           tip.fadeOut(200, function () {
             tip.html("{{defaultTip}}").fadeIn(200);
@@ -25,7 +25,7 @@
       }
       $(document)
         .on('ready click', getTip)
-        .keydown(function(e) {
+        .keydown(function (e) {
           if (e.keyCode == 13 || e.keyCode == 32) {
             getTip();
           }
