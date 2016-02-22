@@ -6,27 +6,27 @@
     {{> footer}}
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script>
+      var displayTip = function (text) {
+        $("#tip").fadeOut(200, function () {
+          $(this).html(text).fadeIn(200);
+        });
+      };
+
       var getTip = function () {
-        $.ajax({
-          url: "{{apiEndpoint}}"
-        })
+        $.ajax("{{apiEndpoint}}")
         .done(function (data) {
-          var tip = $("#tip");
-          tip.fadeOut(200, function () {
-            tip.html(data.tip).fadeIn(200);
-          });
+          displayTip(data.tip);
         })
         .fail(function () {
-          var tip = $("#tip");
-          tip.fadeOut(200, function () {
-            tip.html("{{defaultTip}}").fadeIn(200);
-          });
+          displayTip("{{defaultTip}}");
         });  
       }
+
       $(document)
-        .on('ready click', getTip)
-        .keydown(function (e) {
-          if (e.keyCode == 13 || e.keyCode == 32) {
+        .ready(getTip)
+        .click(getTip)
+        .keypress(function (e) {
+          if ($.inArray(e.keyCode, [13, 32])) {
             getTip();
           }
         });
