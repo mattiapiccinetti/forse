@@ -6,28 +6,28 @@
     {{> footer}}
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script>
-      var displayTip = function (text) {
+      var animate = function (text) {
         $("#tip").fadeOut(200, function () {
           $(this).html(text).fadeIn(200);
         });
       };
 
-      var getTip = function () {
+      var displayTip = function () {
         $.ajax("{{apiEndpoint}}")
         .done(function (data) {
-          displayTip(data.tip);
+          animate(data.tip);
         })
         .fail(function () {
-          displayTip("{{defaultTip}}");
+          animate("{{defaultTip}}");
         });  
       }
 
       $(document)
-        .ready(getTip)
-        .click(getTip)
+        .ready(displayTip)
+        .click(displayTip)
         .keypress(function (e) {
           if ($.inArray(e.keyCode, [13, 32])) {
-            getTip();
+            displayTip();
           }
         });
     </script>
