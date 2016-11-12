@@ -22,7 +22,7 @@ router.get('/tips/random', (req, res) => {
 });
 
 router.post('/tips/random', (req, res) => {
-
+  console.log(req.body)
   pg.connect(conString, (err, client, done) => {
     if (err) {
       return console.error('error fetching client from pool', err);
