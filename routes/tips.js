@@ -35,7 +35,7 @@ router.post('/tips/random', (req, res) => {
       }
       res.send({
         "color": "green",
-        "message": result.rows[Math.floor(Math.random() * result.rows.length)],
+        "message": result.rows[Math.floor(Math.random() * result.rows.length)].tip,
         "notify": false,
         "message_format": "text"
       })
