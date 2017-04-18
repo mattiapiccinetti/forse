@@ -6,6 +6,19 @@
     {{> footer}}
     <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
     <script>
+    var defaultTips = Array(
+      'forse non funziona',
+      'forse devo cambiare billing plan',
+      'forse sono le API',
+      'forse devo guardare i log',
+      'forse non scala',
+      'forse non mi regge il carico',
+      'forse devo fixare',
+      'forse devi fixare e farmi una pull request',
+      'forse devi riprovare più tardi',
+      'forse sono cappato sul numero di richieste',
+      'forse è colpa mia');
+
       var animate = function (text) {
         $("#tip").fadeOut(200, function () {
           $(this).html(text).fadeIn(200);
@@ -13,13 +26,13 @@
       };
 
       var displayTip = function () {
-        $.ajax("{{apiEndpoint}}")
+        $.ajax("{{apiEndpoint}}", { "timeout": 500 })
         .done(function (data) {
           animate(data.tip);
         })
         .fail(function () {
-          animate("{{defaultTip}}");
-        });  
+          animate(defaultTips[Math.floor(Math.random() * defaultTips.length)]);
+        });
       }
 
       $(document)
