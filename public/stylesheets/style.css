@@ -1,35 +1,35 @@
 * {
-	margin: 0 auto;
-	width: 100%;
-	font-family: Courier;
-	text-align: center;
-	color: #333;
+  margin: 0 auto;
+  width: 100%;
+  font-family: Courier;
+  text-align: center;
+  color: #333;
 }
 
 .wrapper {
-	height: 85%;
-	display: table;
+  height: 85vh;
+  display: table;
 }
 
-div.wrapper > a {
-	display: table-cell;
-	vertical-align: middle;
-	font-size: 24px;
-	font-weight: bold;
-	text-decoration: none;
+div.wrapper>a {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .social {
-	height: 5%;
+  height: 5vh;
 }
 
 .footer {
-	height: 10%;
-	display: table;
-	font-size: 11px;
+  height: 10vh;
+  display: table;
+  font-size: 11px;
 }
 
-div.footer > p {
-	display: table-cell;
-	vertical-align: middle;
+div.footer>p {
+  display: table-cell;
+  vertical-align: middle;
 }
