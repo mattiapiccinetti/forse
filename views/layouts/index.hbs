@@ -1,57 +1,72 @@
+<!DOCTYPE html>
 <html>
-  {{> head}}
-  <body>
-    {{> body}}
-    {{> social}}
-    {{> footer}}
-    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script>
-    var defaultTips = Array(
-      'forse non funziona',
-      'forse devo cambiare billing plan',
-      'forse sono le API',
-      'forse devo guardare i log',
-      'forse non scala',
-      'forse non mi regge il carico',
-      'forse devo fixare',
-      'forse devi fixare e farmi una pull request',
-      'forse devi riprovare più tardi',
-      'forse sono cappato sul numero di richieste',
-      'forse è colpa mia',
-      'forse non sei tu, sono io',
-      'forse ho bisogno di una pausa',
-      'forse ho bisogno di prendere del tempo per me',
-      'forse ho bisogno dei miei spazi',
-      'forse non mi capisci',
-      'forse ritorno da mia madre',
-      'forse non ti merito',
-      'forse mi manca la vita da singleton');
 
-      var animate = function (text) {
-        $("#tip").fadeOut(200, function () {
-          $(this).html(text).fadeIn(200);
-        });
-      };
+{{> head}}
+<body>
+  {{> body}}
+  {{> social}}
+  {{> footer}}
+  <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script>
+  var defaultTips = Array(
+    'forse non funziona',
+    'forse devo cambiare billing plan',
+    'forse sono le API',
+    'forse devo guardare i log',
+    'forse non scala',
+    'forse non mi regge il carico',
+    'forse devo fixare',
+    'forse devi fixare e farmi una pull request',
+    'forse devi riprovare più tardi',
+    'forse sono cappato sul numero di richieste',
+    'forse è colpa mia',
+    'forse non sei tu, sono io',
+    'forse ho bisogno di una pausa',
+    'forse ho bisogno di prendere del tempo per me',
+    'forse ho bisogno dei miei spazi',
+    'forse non mi capisci',
+    'forse ritorno da mia madre',
+    'forse non ti merito',
+    'forse mi manca la vita da singleton');
 
-      var displayTip = function () {
-        $.ajax("{{apiEndpoint}}", { "timeout": 500 })
-        .done(function (data) {
-          animate(data.tip);
-        })
-        .fail(function () {
-          animate(defaultTips[Math.floor(Math.random() * defaultTips.length)]);
-        });
-      }
+    var animate = function (text) {
+      $("#tip").fadeOut(200, function () {
+        $(this).html(text).fadeIn(200);
+      });
+    };
 
-      $(document)
-        .ready(displayTip)
-        .click(displayTip)
-        .keypress(function (e) {
-          if ($.inArray(e.keyCode, [13, 32])) {
-            displayTip();
-          }
+    var displayTip = function () {
+      $.ajax("{{apiEndpoint}}", { "timeout": 500 })
+      .done(function (data) {
+        animate(data.tip);
+      })
+      .fail(function () {
+        animate(defaultTips[Math.floor(Math.random() * defaultTips.length)]);
+      });
+    }
+
+    $(document)
+      .ready(displayTip)
+      .click(displayTip)
+      .keypress(function(e) {
+        if ($.inArray(e.keyCode, [13, 32])) {
+          displayTip();
+        }
+      });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('public/service-worker.js')
+        .then(function(reg) {
+          // registration worked
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch(function(error) {
+          // registration failed
+          console.log('Registration failed with ' + error);
         });
-    </script>
-    {{> analytics}}
-  </body>
+    }
+  </script>
+  {{> analytics}}
+</body>
+
 </html>
