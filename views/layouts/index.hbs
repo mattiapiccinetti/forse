@@ -1,36 +1,49 @@
+<!DOCTYPE html>
 <html>
-  {{> head}}
-  <body>
-    {{> body}}
-    {{> social}}
-    {{> footer}}
-    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-    <script>
-      var animate = function (text) {
-        $("#tip").fadeOut(200, function () {
-          $(this).html(text).fadeIn(200);
-        });
-      };
+{{> head}}
 
-      var displayTip = function () {
-        $.ajax("{{apiEndpoint}}")
-        .done(function (data) {
+<body>
+  {{> body}} {{> social}} {{> footer}}
+  <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+  <script>
+    var animate = function(text) {
+      $("#tip").fadeOut(200, function() {
+        $(this).html(text).fadeIn(200);
+      });
+    };
+
+    var displayTip = function() {
+      $.ajax("{{apiEndpoint}}")
+        .done(function(data) {
           animate(data.tip);
         })
-        .fail(function () {
+        .fail(function() {
           animate("{{defaultTip}}");
-        });  
-      }
-
-      $(document)
-        .ready(displayTip)
-        .click(displayTip)
-        .keypress(function (e) {
-          if ($.inArray(e.keyCode, [13, 32])) {
-            displayTip();
-          }
         });
-    </script>
-    {{> analytics}}
-  </body>
+    }
+
+    $(document)
+      .ready(displayTip)
+      .click(displayTip)
+      .keypress(function(e) {
+        if ($.inArray(e.keyCode, [13, 32])) {
+          displayTip();
+        }
+      });
+  </script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('public/service-worker.js')
+        .then(function(reg) {
+          // registration worked
+          console.log('Registration succeeded. Scope is ' + reg.scope);
+        }).catch(function(error) {
+          // registration failed
+          console.log('Registration failed with ' + error);
+        });
+    }
+  </script>
+  {{> analytics}}
+</body>
+
 </html>
