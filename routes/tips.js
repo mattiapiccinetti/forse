@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 
-var conString = process.env.DATABASE_URL;
+var conString = process.env.DATABASE_URL + '?ssl=true';
 var superMegaSecretTip = process.env.SUPER_MEGA_SECRET_TIP;
 
 router.get('/tips/random', (req, res) => {
