@@ -35,7 +35,8 @@
       });
     };
 
-    var displayTip = function () {
+    var displayTip = function (e) {
+      e.preventDefault();
       $.ajax("{{apiEndpoint}}", { "timeout": 500 })
       .done(function (data) {
         animate(data.tip);
