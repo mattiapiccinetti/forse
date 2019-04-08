@@ -47,7 +47,6 @@
     }
 
     $(document)
-      .ready(displayTip)
       .click(displayTip)
       .keypress(function(e) {
         if ($.inArray(e.keyCode, [13, 32])) {
