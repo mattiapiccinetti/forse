@@ -4,7 +4,7 @@
     {{> body}}
     {{> social}}
     {{> footer}}
-    <script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.0.min.js" async></script>
     <script>
     var defaultTips = Array(
       'forse non funziona',
@@ -33,7 +33,8 @@
         });
       };
 
-      var displayTip = function () {
+      var displayTip = function (event) {
+        event.preventDefault();
         $.ajax("{{apiEndpoint}}", { "timeout": 500 })
         .done(function (data) {
           animate(data.tip);
@@ -43,14 +44,8 @@
         });
       }
 
-      $(document)
-        .ready(displayTip)
-        .click(displayTip)
-        .keypress(function (e) {
-          if ($.inArray(e.keyCode, [13, 32])) {
-            displayTip();
-          }
-        });
+      document.getElementById('wrapper').addEventListener('click', displayTip);
+      document.addEventListener('keypress', displayTip);
     </script>
     {{> analytics}}
   </body>
