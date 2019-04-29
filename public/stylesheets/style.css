@@ -29,7 +29,7 @@ main#wrapper > a {
   font-size: 11px;
 }
 
-div.footer > p {
+div.footer>p {
   display: table-cell;
   vertical-align: middle;
 }
