@@ -17,11 +17,11 @@
   "author": "Mattia Piccinetti",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "~1.9.2",
     "debug": "~2.6.9",
-    "morgan": "~1.9.1",
-    "express": "~4.13.4",
+    "express": "^4.16.4",
     "express-handlebars": "~3.0.0",
-    "body-parser" : "~1.9.2",
+    "morgan": "~1.9.1",
     "pg": "~4.5.7"
   }
 }
