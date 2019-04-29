@@ -6,12 +6,12 @@
   color: #333;
 }
 
-.wrapper {
+#wrapper {
   height: 85vh;
   display: table;
 }
 
-div.wrapper>a {
+main#wrapper > a {
   display: table-cell;
   vertical-align: middle;
   font-size: 24px;
