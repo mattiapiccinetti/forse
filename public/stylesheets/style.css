@@ -7,12 +7,11 @@
 }
 
 #wrapper {
-  height: 85%;
+  height: 85vh;
   display: table;
 }
 
 main#wrapper > a {
-
   display: table-cell;
   vertical-align: middle;
   font-size: 24px;
