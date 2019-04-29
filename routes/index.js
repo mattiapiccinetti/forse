@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 
   res.render('layouts/index', {
     title: 'forse',
-    apiEndpoint: '/api/tips/random',
+    apiEndpoint: req.protocol + '://' + req.headers.host + '/api/tips/random',
     randomTip: randomTip,
     currentYear: new Date().getFullYear()
   });
