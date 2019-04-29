@@ -6,12 +6,13 @@
   color: #333;
 }
 
-.wrapper {
-  height: 85vh;
+#wrapper {
+  height: 85%;
   display: table;
 }
 
-div.wrapper>a {
+main#wrapper > a {
+
   display: table-cell;
   vertical-align: middle;
   font-size: 24px;
@@ -29,7 +30,7 @@ div.wrapper>a {
   font-size: 11px;
 }
 
-div.footer>p {
+div.footer > p {
   display: table-cell;
   vertical-align: middle;
 }
