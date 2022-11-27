@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="forse" />
+<link rel="stylesheet" src="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css" />
+<title>Forse</title>
+<style>
+    * {
+        margin: 0 auto;
+        width: 100%;
+        font-family: Courier;
+        text-align: center;
+        color: #333;
+    }
+    #wrapper {
+        height: 85vh;
+        display: table;
+    }
+    main#wrapper > a {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 24px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .social {
+        height: 5vh;
+    }
+    .footer {
+        height: 10vh;
+        display: table;
+        font-size: 11px;
+    }
+    div.footer > p {
+        display: table-cell;
+        vertical-align: middle;
+    }
+</style>
+</head>      
+<body>
+    <main id="wrapper">
+        <a href="#" id="tip" rel="nofollow">Clicca in giro</a>
+    </main>
+    <div class="social">
+        <a href="https://twitter.com/intent/follow?screen_name=peachofpersia">Follow @peachofpersia</a>
+    </div>
+    <div class="footer">
+        <p>&copy; Copyright 2014 - 2022 Forse - All Rights Reserved</p>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.1.0.min.js" async></script>
+    <script>
+        var defaultTips = Array(
+        "forse non funziona",
+        "forse devo cambiare billing plan",
+        "forse sono le API",
+        "forse devo guardare i log",
+        "forse non scala",
+        "forse non mi regge il carico",
+        "forse devo fixare",
+        "forse devi fixare e farmi una pull request",
+        "forse devi riprovare più tardi",
+        "forse sono cappato sul numero di richieste",
+        "forse è colpa mia",
+        "forse non sei tu, sono io",
+        "forse ho bisogno di una pausa",
+        "forse ho bisogno di prendere del tempo per me",
+        "forse ho bisogno dei miei spazi",
+        "forse non mi capisci",
+        "forse ritorno da mia madre",
+        "forse non ti merito",
+        "forse mi manca la vita da singleton",
+        "forse è un processo in background",
+        "forse devi riavviare",
+        "forse è un file corrotto",
+        "forse è un trigger sul db",
+        "forse ho capito, ah no...",
+        "forse devi fare refresh",
+        "forse non hai riavviato",
+        "forse sono gli indici corrotti",
+        "forse è come diceva @ziobrando",
+        "forse è andato in timeout",
+        "forse è un problema di spazio su disco",
+        "forse hai sbagliato mestiere",
+        "forse si è freezato",
+        "forse è il dns",
+        "forse è giusto così",
+        "forse lo deve fare",
+        "forse è un problema di cookie",
+        "forse un problema di config",
+        "forse sono cambiate le condizioni al contorno",
+        "forse si è inchiodato il berkeley",
+        "forse è la vpn",
+        "forse è il firewall",
+        "forse non è la directory giusta",
+        "forse è il garbage collector",
+        "forse servivano solo 3 shard",
+        "forse non doveva essere singleton",
+        "forse è colpa di fastweb",
+        "forse è scaduta la licenza",
+        "forse è il cambio di stagione",
+        "forse è lo script di migrazione",
+        "forse è il datastore delle config",
+        "forse è il cluster di elastic",
+        "forse è il cluster di mesos",
+        "forse è una feature",
+        "forse non ha caricato il template",
+        "forse è un problema di merge",
+        "forse è un memory leak",
+        "forse è asincrono",
+        "forse hai sbagliato la password",
+        "forse è un problema del load balancer",
+        "forse è una race condition",
+        "forse lo ha buttato giù una query",
+        "forse è il data warehouse",
+        "forse è stata una sql injection",
+        "forse non hai pushato",
+        "forse hai sottostimato il task",
+        "forse è il connection pool",
+        "forse è per motivi storici",
+        "forse è un'esigenza di business",
+        "forse è una major version",
+        "forse non è compatibile",
+        "forse ci sta già lavorando qualcun altro",
+        "forse è colpa tua",
+        "forse non è colpa tua",
+        "forse no",
+        "forse è una user story",
+        "forse mancano le spec",
+        "forse è il min_score",
+        "forse devi aspettare che si raffreddi",
+        "forse è ancora caldo",
+        "forse è ancora troppo presto",
+        "forse hai troppe icone sul desktop",
+        "forse va bene lo stesso",
+        "forse va killato",
+        "forse dovevi accorgertene prima",
+        "forse dovresti fare una pausa",
+        "forse devi rivedere il tuo cv",
+        "forse è un sovrallappamento dello snado",
+        "forse è un problema di CORS",
+        "forse non hai messo la clausola di where",
+        "forse è colpa di Roby");
+
+        var animate = function (text) {
+            $("#tip").fadeOut(200, function () {
+                $(this).html(text).fadeIn(200);
+            });
+        };
+        
+        var displayTip = function (event) {
+            event.preventDefault();
+            animate(defaultTips[Math.floor(Math.random() * defaultTips.length)]);
+        }
+
+        document.getElementById("wrapper").addEventListener("click", displayTip);
+        document.addEventListener("keypress", displayTip);
+    </script>
+</body>
+</html>
