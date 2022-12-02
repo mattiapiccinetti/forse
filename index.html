@@ -41,18 +41,18 @@
 </head>      
 <body>
     <main id="wrapper">
-        <a href="#" id="tip" rel="nofollow">Clicca in giro</a>
+        <a href="#" id="tip" rel="nofollow"></a>
     </main>
     <div class="social">
         <a href="https://twitter.com/intent/follow?screen_name=peachofpersia">Follow @peachofpersia</a>
     </div>
     <div class="footer">
-        <p>&copy; Copyright 2014 - 2022 Forse - All Rights Reserved</p>
+        <p id="copyright"></p>
     </div>
 
     <script src="//code.jquery.com/jquery-2.1.0.min.js" async></script>
     <script>
-        var defaultTips = Array(
+        var tips = Array(
         "forse non funziona",
         "forse devo cambiare billing plan",
         "forse sono le API",
@@ -149,12 +149,18 @@
                 $(this).html(text).fadeIn(200);
             });
         };
-        
-        var displayTip = function (event) {
-            event.preventDefault();
-            animate(defaultTips[Math.floor(Math.random() * defaultTips.length)]);
+
+        var randomTip = function () {
+            return tips[Math.floor(Math.random() * tips.length)];
         }
 
+        var displayTip = function (event) {
+            event.preventDefault();
+            animate(randomTip());
+        }
+
+        document.getElementById("copyright").innerHTML = "&copy; Copyright 2014 - " + new Date().getFullYear() + " Forse - All Rights Reserved";
+        document.getElementById("tip").innerHTML = randomTip();
         document.getElementById("wrapper").addEventListener("click", displayTip);
         document.addEventListener("keypress", displayTip);
     </script>
