@@ -24,6 +24,16 @@ jobs:
 
       - uses: actions/configure-pages@v4
 
+      - name: Build
+        run: |
+          ENCODED=$(base64 -w0 tips.txt)
+          sed "s|{{TIPS}}|$ENCODED|g" index.html > /tmp/built.html
+          npx --yes html-minifier-terser \
+            --collapse-whitespace --remove-comments \
+            --remove-optional-tags --remove-redundant-attributes \
+            --minify-css true --minify-js true \
+            /tmp/built.html -o index.html
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
