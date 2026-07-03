@@ -7,6 +7,7 @@
 <title>Forse</title>
 <style>
     * { margin: 0 auto; width: 100%; font-family: Courier; text-align: center; color: #333; touch-action: manipulation; }
+    html, body { overscroll-behavior: none; }
     #wrapper { height: 85vh; display: table; }
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s; }
     .footer { height: 10vh; display: table; font-size: 11px; }
@@ -30,6 +31,9 @@
         tip.innerHTML = rand();
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
+        let startY = 0;
+        document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
+        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(rand()); }, {passive: true});
     </script>
 </body>
 </html>
