@@ -12,6 +12,8 @@
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s; }
     .footer { height: 10vh; display: table; font-size: 11px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
+    #share { cursor: pointer; opacity: 0.5; }
+    #share:hover { opacity: 1; }
 </style>
 </head>
 <body>
@@ -24,16 +26,19 @@
     <script>
         const tips = new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))).trim().split('\n');
         const tip = document.getElementById('tip');
-        const show = t => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=t; tip.style.opacity=1; }, 200); };
-        const rand = () => tips[Math.floor(Math.random()*tips.length)];
-        const next = e => { e.preventDefault(); show(rand()); };
-        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
-        tip.innerHTML = rand();
+        const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'','#'+i); };
+        const randIndex = () => Math.floor(Math.random()*tips.length);
+        const next = e => { e.preventDefault(); show(randIndex()); };
+        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved &mdash; <span id="share">share</span>';
+        const shareEl = document.getElementById('share');
+        const hash = parseInt(window.location.hash.slice(1));
+        show((hash >= 0 && hash < tips.length) ? hash : randIndex());
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
         let startY = 0;
         document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
-        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(rand()); }, {passive: true});
+        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randIndex()); }, {passive: true});
+        shareEl.addEventListener('click', e => { e.stopPropagation(); navigator.clipboard.writeText(window.location.href); shareEl.textContent='copied!'; setTimeout(()=>{ shareEl.textContent='share'; }, 1500); });
     </script>
 </body>
 </html>
