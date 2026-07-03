@@ -32,14 +32,14 @@
         const tips = new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))).trim().split('\n');
         const tip = document.getElementById('tip');
         const themeEl = document.getElementById('theme');
-        const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'','#'+i); };
+        const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'','?tip='+i); };
         const randIndex = () => Math.floor(Math.random()*tips.length);
         const next = e => { e.preventDefault(); show(randIndex()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved &mdash; <span id="share">share</span>';
         const shareEl = document.getElementById('share');
-        const hash = parseInt(window.location.hash.slice(1));
-        show((hash >= 0 && hash < tips.length) ? hash : randIndex());
+        const tip_param = parseInt(new URLSearchParams(window.location.search).get('tip'));
+        show((tip_param >= 0 && tip_param < tips.length) ? tip_param : randIndex());
         setDark(localStorage.getItem('theme') !== 'light');
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
