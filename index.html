@@ -5,18 +5,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="forse" />
 <title>Forse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap">
 <style>
     :root { --fg: #333; --bg: #fff; }
     body.dark { --fg: #ccc; --bg: #111; }
-    * { margin: 0 auto; width: 100%; font-family: Courier; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
+    * { margin: 0 auto; width: 100%; font-family: 'VT323', monospace; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
     html, body { overscroll-behavior: none; background: var(--bg); }
     #wrapper { height: 85vh; display: table; }
-    main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
-    .footer { height: 10vh; display: table; font-size: 11px; }
+    main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 32px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
+    .footer { height: 10vh; display: table; font-size: 16px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
     #share { cursor: pointer; opacity: 0.5; }
     #share:hover { opacity: 1; }
-    #theme { position: fixed; top: 2px; right: 2px; cursor: pointer; font-size: 11px; width: auto; margin: 0; background: none; border: none; padding: 12px 14px; opacity: 0.5; }
+    #theme { position: fixed; top: 2px; right: 2px; cursor: pointer; font-size: 16px; width: auto; margin: 0; background: none; border: none; padding: 12px 14px; opacity: 0.5; }
     #theme:hover { opacity: 1; }
 </style>
 </head>
