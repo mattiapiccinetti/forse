@@ -6,17 +6,22 @@
 <meta name="description" content="forse" />
 <title>Forse</title>
 <style>
-    * { margin: 0 auto; width: 100%; font-family: Courier; text-align: center; color: #333; touch-action: manipulation; }
-    html, body { overscroll-behavior: none; }
+    :root { --fg: #333; --bg: #fff; }
+    body.dark { --fg: #ccc; --bg: #111; }
+    * { margin: 0 auto; width: 100%; font-family: Courier; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
+    html, body { overscroll-behavior: none; background: var(--bg); }
     #wrapper { height: 85vh; display: table; }
-    main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s; }
+    main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     .footer { height: 10vh; display: table; font-size: 11px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
     #share { cursor: pointer; opacity: 0.5; }
     #share:hover { opacity: 1; }
+    #theme { position: fixed; top: 14px; right: 16px; cursor: pointer; font-size: 11px; width: auto; margin: 0; background: none; border: none; padding: 0; opacity: 0.5; }
+    #theme:hover { opacity: 1; }
 </style>
 </head>
 <body>
+    <button id="theme"></button>
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
@@ -26,19 +31,23 @@
     <script>
         const tips = new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))).trim().split('\n');
         const tip = document.getElementById('tip');
+        const themeEl = document.getElementById('theme');
         const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'','#'+i); };
         const randIndex = () => Math.floor(Math.random()*tips.length);
         const next = e => { e.preventDefault(); show(randIndex()); };
+        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved &mdash; <span id="share">share</span>';
         const shareEl = document.getElementById('share');
         const hash = parseInt(window.location.hash.slice(1));
         show((hash >= 0 && hash < tips.length) ? hash : randIndex());
+        setDark(localStorage.getItem('theme') !== 'light');
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
         let startY = 0;
         document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randIndex()); }, {passive: true});
         shareEl.addEventListener('click', e => { e.stopPropagation(); navigator.clipboard.writeText(window.location.href); shareEl.textContent='copied!'; setTimeout(()=>{ shareEl.textContent='share'; }, 1500); });
+        themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
     </script>
 </body>
 </html>
