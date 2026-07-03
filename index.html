@@ -25,7 +25,7 @@
         <p id="copyright"></p>
     </div>
     <script>
-        const tips = atob("{{TIPS}}").trim().split('\n');
+        const tips = new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))).trim().split('\n');
         const tip = document.getElementById('tip');
         const show = t => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=t; tip.style.opacity=1; }, 200); };
         const rand = () => tips[Math.floor(Math.random()*tips.length)];
