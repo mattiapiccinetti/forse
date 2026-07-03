@@ -16,8 +16,6 @@
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 32px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     .footer { height: 10vh; display: table; font-size: 16px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
-    #share { cursor: pointer; opacity: 0.5; }
-    #share:hover { opacity: 1; }
     #theme { position: fixed; top: 2px; right: 2px; cursor: pointer; font-size: 16px; width: auto; margin: 0; background: none; border: none; padding: 12px 14px; opacity: 0.5; }
     #theme:hover { opacity: 1; }
 </style>
@@ -38,8 +36,7 @@
         const randIndex = () => Math.floor(Math.random()*tips.length);
         const next = e => { e.preventDefault(); show(randIndex()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
-        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved &mdash; <span id="share">share</span>';
-        const shareEl = document.getElementById('share');
+        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
         const tip_param = parseInt(new URLSearchParams(window.location.search).get('tip'));
         show((tip_param >= 0 && tip_param < tips.length) ? tip_param : randIndex());
         setDark(localStorage.getItem('theme') !== 'light');
@@ -48,7 +45,6 @@
         let startY = 0;
         document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randIndex()); }, {passive: true});
-        shareEl.addEventListener('click', e => { e.stopPropagation(); navigator.clipboard.writeText(window.location.href); shareEl.textContent='copied!'; setTimeout(()=>{ shareEl.textContent='share'; }, 1500); });
         themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
     </script>
 </body>
