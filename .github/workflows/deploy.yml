@@ -28,11 +28,8 @@ jobs:
         run: |
           ENCODED=$(base64 -w0 tips.txt)
           sed "s|{{TIPS}}|$ENCODED|g" index.html > /tmp/built.html
-          npx --yes html-minifier-terser \
-            --collapse-whitespace --remove-comments \
-            --remove-optional-tags --remove-redundant-attributes \
-            --minify-css true --minify-js true \
-            /tmp/built.html -o index.html
+          echo '{"collapseWhitespace":true,"removeComments":true,"removeOptionalTags":true,"removeRedundantAttributes":true,"minifyCSS":true,"minifyJS":{"compress":true,"mangle":true}}' > /tmp/minifier.json
+          npx --yes html-minifier-terser --config-file /tmp/minifier.json /tmp/built.html -o index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
