@@ -9,7 +9,6 @@
     * { margin: 0 auto; width: 100%; font-family: Courier; text-align: center; color: #333; touch-action: manipulation; }
     #wrapper { height: 85vh; display: table; }
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 24px; font-weight: bold; text-decoration: none; transition: opacity 0.2s; }
-    .social { height: 5vh; }
     .footer { height: 10vh; display: table; font-size: 11px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
 </style>
@@ -18,9 +17,6 @@
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
-    <div class="social">
-        <a href="https://twitter.com/intent/follow?screen_name=peachofpersia">Follow @peachofpersia</a>
-    </div>
     <div class="footer">
         <p id="copyright"></p>
     </div>
@@ -29,7 +25,7 @@
         const tip = document.getElementById('tip');
         const show = t => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=t; tip.style.opacity=1; }, 200); };
         const rand = () => tips[Math.floor(Math.random()*tips.length)];
-        const next = e => { if(e.target.tagName==='A'&&e.target.href&&!e.target.href.startsWith('#'))return; e.preventDefault(); show(rand()); };
+        const next = e => { e.preventDefault(); show(rand()); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
         tip.innerHTML = rand();
         document.addEventListener('click', next);
