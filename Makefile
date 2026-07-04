@@ -19,9 +19,8 @@ run: build
 	docker run --rm -p $(PORT):80 forse
 
 open: build
-	@docker ps --format '{{.ID}}\t{{.Ports}}' | grep ':$(PORT)->' | cut -f1 | xargs -r docker stop 2>/dev/null || true
-	@docker rm -f forse-dev 2>/dev/null || true
-	docker run --rm -d --name forse-dev -p $(PORT):80 forse
+	@docker rm -f forse-dev 2>/dev/null; true
+	docker run -d --name forse-dev -p $(PORT):80 forse
 	@until curl -s http://localhost:$(PORT) > /dev/null 2>&1; do sleep 0.1; done
 	open http://localhost:$(PORT)
 
