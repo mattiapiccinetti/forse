@@ -16,17 +16,17 @@
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     .footer { height: 10vh; display: table; font-size: 12px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
-    #theme, #btn-linkedin, #btn-github { position: fixed; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; min-width: 70px; text-align: center; box-sizing: content-box; color: var(--fg); text-decoration: none; }
-    #theme { top: 12px; }
-    #btn-linkedin { top: 56px; }
-    #btn-github { top: 100px; }
+    #controls { position: fixed; bottom: 16px; left: 0; right: 0; display: flex; justify-content: center; gap: 24px; pointer-events: none; }
+    #theme, #btn-linkedin, #btn-github { pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 0; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
     #theme:hover, #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
 </style>
 </head>
 <body>
-    <button id="theme"></button>
-    <a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">linkedin</a>
-    <a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">github</a>
+    <div id="controls">
+        <button id="theme"></button>
+        <a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">[linkedin]</a>
+        <a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">[github]</a>
+    </div>
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
@@ -41,7 +41,7 @@
         const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'',base+i); };
         const randIndex = () => Math.floor(Math.random()*tips.length);
         const next = e => { e.preventDefault(); show(randIndex()); };
-        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? 'light' : 'dark'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
+        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
         const stored = sessionStorage.getItem('tip');
         if (stored !== null) sessionStorage.removeItem('tip');
