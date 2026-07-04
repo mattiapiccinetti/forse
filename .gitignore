@@ -3,3 +3,6 @@ npm-debug.log
 
 .DS_Store
 dist
+
+CLAUDE.md
+.claude
