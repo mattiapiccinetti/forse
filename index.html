@@ -11,7 +11,7 @@
     :root { --fg: #333; --bg: #fff; }
     body.dark { --fg: #ccc; --bg: #111; }
     * { margin: 0 auto; width: 100%; font-family: 'IBM Plex Mono', monospace; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
-    html, body { overscroll-behavior: none; background: var(--bg); }
+    html, body { overscroll-behavior: none; background: var(--bg); min-height: 100vh; }
     #wrapper { height: 85vh; display: table; }
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     .footer { height: 10vh; display: table; font-size: 12px; }
