@@ -18,7 +18,8 @@
     #theme:hover { opacity: 1; }
     #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
-    #copyright { opacity: 0.4; letter-spacing: 1px; }
+    #copyright { letter-spacing: 1px; }
+    #copyright span { opacity: 0.4; }
     .footer { height: 10vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; }
     .mbr { display: none; }
     @media (max-width: 480px) { .mbr { display: block; } #copyright { font-size: 10px; } }
@@ -43,7 +44,7 @@
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
-        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse<br class="mbr"> &ndash;<br class="mbr"> All Rights Reserved';
+        document.getElementById('copyright').innerHTML = '<span>&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse</span><br class="mbr"> &ndash;<br class="mbr"> <span>All Rights Reserved</span>';
         const h = window.location.hash.slice(1);
         show(tips[h] !== undefined ? h : randHash());
         setDark(localStorage.getItem('theme') !== 'light');
