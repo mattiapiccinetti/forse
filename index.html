@@ -16,7 +16,7 @@
     #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
     main#wrapper > a { width: auto; max-width: calc(100% - 48px); font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; word-break: break-word; }
     #controls { position: fixed; top: 16px; right: 16px; width: auto; display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
-    #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: center; }
+    #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: right; }
     #theme:hover, #share:hover { opacity: 1; }
     #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 12px; letter-spacing: 1px; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
     #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
@@ -35,7 +35,7 @@
 <body>
     <div id="controls">
         <button id="theme"></button>
-        <button id="share">[ copy  ]</button>
+        <button id="share">[ copy  ]</button>
     </div>
     <div id="toast">copied</div>
     <main id="wrapper">
@@ -54,7 +54,7 @@
         const show = h => { currentHash = h; tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; }, 200); };
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
-        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark  ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
+        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark  ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '<span>&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse</span><br class="mbr"> &ndash;<br class="mbr"> <span>All Rights Reserved</span>';
         const h = window.location.hash.slice(1);
         show(tips[h] !== undefined ? h : randHash());
