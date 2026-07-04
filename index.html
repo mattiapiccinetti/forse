@@ -15,10 +15,9 @@
     body { overscroll-behavior: none; background: var(--bg); height: 100vh; height: -webkit-fill-available; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
     #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
     main#wrapper > a { width: auto; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
-    #theme { position: fixed; top: 16px; right: 16px; width: auto; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); }
-    #theme:hover { opacity: 1; }
-    #share { position: fixed; top: 16px; left: 16px; width: auto; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); }
-    #share:hover { opacity: 1; }
+    #controls { position: fixed; top: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
+    #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: center; }
+    #theme:hover, #share:hover { opacity: 1; }
     #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 12px; letter-spacing: 1px; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
     #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
@@ -31,8 +30,10 @@
 </style>
 </head>
 <body>
-    <button id="theme"></button>
-    <button id="share">[ copy ]</button>
+    <div id="controls">
+        <button id="theme"></button>
+        <button id="share">[ copy ]</button>
+    </div>
     <div id="toast">copied</div>
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
