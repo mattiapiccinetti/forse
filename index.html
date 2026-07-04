@@ -61,7 +61,7 @@
         let startX = 0, startY = 0;
         document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - startX, dy = e.changedTouches[0].clientY - startY; if (Math.abs(dx) > 60 || Math.abs(dy) > 60) show(randHash()); }, {passive: true});
-        themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
+        themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); themeEl.blur(); });
         const shareEl = document.getElementById('share');
         const toastEl = document.getElementById('toast');
         let toastTimer;
