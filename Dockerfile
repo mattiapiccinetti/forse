@@ -1,5 +1,6 @@
 FROM node:alpine AS builder
 WORKDIR /build
+RUN apk add --no-cache openssl
 RUN npm install -g html-minifier-terser
 COPY .minifier.json ./
 COPY index.html ./
