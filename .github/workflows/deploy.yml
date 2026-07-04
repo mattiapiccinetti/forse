@@ -40,12 +40,3 @@ jobs:
       - id: pages
         uses: actions/deploy-pages@v4
 
-      - name: Set Heroku maintenance page URL
-        env:
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: |
-          curl -sf -X PATCH https://api.heroku.com/apps/forse/config-vars \
-            -H "Authorization: Bearer $HEROKU_API_KEY" \
-            -H "Content-Type: application/json" \
-            -H "Accept: application/vnd.heroku+json; version=3" \
-            -d '{"MAINTENANCE_PAGE_URL": "https://mattiapiccinetti.github.io/forse/"}'
