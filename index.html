@@ -14,24 +14,23 @@
     html, body { overscroll-behavior: none; background: var(--bg); min-height: 100vh; }
     #wrapper { height: 85vh; display: table; }
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
-    .footer { height: 10vh; display: table; font-size: 12px; }
-    div.footer > p { display: table-cell; vertical-align: middle; }
-    #controls { position: fixed; bottom: 16px; left: 0; right: 0; display: flex; justify-content: center; gap: 24px; pointer-events: none; }
-    #theme, #btn-linkedin, #btn-github { pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 0; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
-    #theme:hover, #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
+    #theme { position: fixed; top: 16px; right: 16px; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 0; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); }
+    #theme:hover { opacity: 1; }
+    #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
+    #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
+    #copyright { opacity: 0.4; letter-spacing: 1px; }
+    .footer { height: 10vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; }
+    div.footer > p { margin: 0; width: auto; }
 </style>
 </head>
 <body>
-    <div id="controls">
-        <button id="theme"></button>
-        <a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">[linkedin]</a>
-        <a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">[github]</a>
-    </div>
+    <button id="theme"></button>
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
     <div class="footer">
         <p id="copyright"></p>
+        <p id="social"><a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">[linkedin]</a><a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">[github]</a></p>
     </div>
     <script>
         const tips = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))));
