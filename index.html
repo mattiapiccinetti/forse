@@ -65,7 +65,7 @@
         const shareEl = document.getElementById('share');
         const toastEl = document.getElementById('toast');
         let toastTimer;
-        shareEl.addEventListener('click', e => { e.stopPropagation(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); });
+        shareEl.addEventListener('click', e => { e.stopPropagation(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); shareEl.blur(); });
         ['btn-linkedin', 'btn-github'].forEach(id => {
             ['click', 'keypress'].forEach(evt => document.getElementById(id).addEventListener(evt, e => e.stopPropagation()));
         });
