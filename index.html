@@ -36,7 +36,7 @@
         const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'',base+i); };
         const randIndex = () => Math.floor(Math.random()*tips.length);
         const next = e => { e.preventDefault(); show(randIndex()); };
-        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
+        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? 'light' : 'dark'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
         const stored = sessionStorage.getItem('tip');
         if (stored !== null) sessionStorage.removeItem('tip');
