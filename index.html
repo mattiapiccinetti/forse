@@ -14,7 +14,7 @@
     html { height: -webkit-fill-available; overflow: hidden; }
     body { overscroll-behavior: none; background: var(--bg); height: 100vh; height: -webkit-fill-available; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
     #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
-    main#wrapper > a { width: auto; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
+    main#wrapper > a { width: auto; max-width: calc(100% - 48px); font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; word-break: break-word; }
     #controls { position: fixed; top: 16px; right: 16px; width: auto; display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
     #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: center; }
     #theme:hover, #share:hover { opacity: 1; }
