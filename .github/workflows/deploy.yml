@@ -26,21 +26,8 @@ jobs:
 
       - name: Build
         run: |
-          ENCODED=$(
-            json="{"
-            first=true
-            while IFS= read -r line || [[ -n "$line" ]]; do
-              [[ -z "$line" ]] && continue
-              hash=$(printf '%s' "$line" | md5sum | cut -d' ' -f1)
-              $first && first=false || json="$json,"
-              json="$json\"$hash\":\"$line\""
-            done < tips.txt
-            json="$json}"
-            printf '%s' "$json" | base64 -w0
-          )
-          sed "s|{{TIPS}}|$ENCODED|g" index.html > /tmp/built.html
-          echo '{"collapseWhitespace":true,"removeComments":true,"removeOptionalTags":true,"removeRedundantAttributes":true,"minifyCSS":true,"minifyJS":{"compress":true,"mangle":true}}' > /tmp/minifier.json
-          npx --yes html-minifier-terser --config-file /tmp/minifier.json /tmp/built.html -o index.html
+          node build.js
+          npx --yes html-minifier-terser --config-file .minifier.json built.html -o index.html
 
       - uses: actions/upload-pages-artifact@v3
         with:
