@@ -20,6 +20,8 @@
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
     #copyright { opacity: 0.4; letter-spacing: 1px; }
     .footer { height: 10vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; }
+    .mbr { display: none; }
+    @media (max-width: 480px) { .mbr { display: block; } #copyright { font-size: 10px; } }
     div.footer > p { margin: 0; width: auto; }
 </style>
 </head>
@@ -29,8 +31,8 @@
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
     <div class="footer">
+        <p id="social"><a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">linkedin</a> | <a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">github</a></p>
         <p id="copyright"></p>
-        <p id="social"><a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">[linkedin]</a><a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">[github]</a></p>
     </div>
     <script>
         const tips = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))));
@@ -40,8 +42,8 @@
         const show = h => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; }, 200); history.replaceState(null,'','#'+h); };
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
-        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
-        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
+        const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
+        document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse<br class="mbr"> &ndash;<br class="mbr"> All Rights Reserved';
         const h = window.location.hash.slice(1);
         show(tips[h] !== undefined ? h : randHash());
         setDark(localStorage.getItem('theme') !== 'light');
