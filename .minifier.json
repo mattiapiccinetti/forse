@@ -1,0 +1,8 @@
+{
+  "collapseWhitespace": true,
+  "removeComments": true,
+  "removeOptionalTags": true,
+  "removeRedundantAttributes": true,
+  "minifyCSS": true,
+  "minifyJS": { "compress": true, "mangle": true }
+}
