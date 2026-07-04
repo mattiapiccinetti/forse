@@ -34,25 +34,23 @@
         <p id="copyright"></p>
     </div>
     <script>
-        const tips = new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))).trim().split('\n');
+        const tips = JSON.parse(new TextDecoder().decode(Uint8Array.from(atob("{{TIPS}}"),c=>c.charCodeAt(0))));
+        const hashes = Object.keys(tips);
         const tip = document.getElementById('tip');
         const themeEl = document.getElementById('theme');
-        const base = window.location.pathname.replace(/\/?\d*$/, '/');
-        const show = i => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[i]; tip.style.opacity=1; }, 200); history.replaceState(null,'',base+i); };
-        const randIndex = () => Math.floor(Math.random()*tips.length);
-        const next = e => { e.preventDefault(); show(randIndex()); };
+        const show = h => { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; }, 200); history.replaceState(null,'','#'+h); };
+        const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
+        const next = e => { e.preventDefault(); show(randHash()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[light]' : '[dark]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
         document.getElementById('copyright').innerHTML = '&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse &mdash; All Rights Reserved';
-        const stored = sessionStorage.getItem('tip');
-        if (stored !== null) sessionStorage.removeItem('tip');
-        const tipId = stored !== null ? parseInt(stored) : parseInt(window.location.pathname.split('/').pop());
-        show((tipId >= 0 && tipId < tips.length) ? tipId : randIndex());
+        const h = window.location.hash.slice(1);
+        show(tips[h] !== undefined ? h : randHash());
         setDark(localStorage.getItem('theme') !== 'light');
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
         let startY = 0;
         document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
-        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randIndex()); }, {passive: true});
+        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randHash()); }, {passive: true});
         themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
         ['btn-linkedin', 'btn-github'].forEach(id => {
             ['click', 'keypress'].forEach(evt => document.getElementById(id).addEventListener(evt, e => e.stopPropagation()));
