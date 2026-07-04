@@ -1,6 +1,6 @@
 PORT := 4567
 
-.PHONY: all help build run open clean
+.PHONY: all help build run open clean retry
 
 all: help
 
@@ -11,6 +11,7 @@ help:
 	@echo "  run     build image and serve at http://localhost:$(PORT)"
 	@echo "  open    build image, serve in background, and open in browser"
 	@echo "  clean   remove the Docker image"
+	@echo "  retry   re-run the latest failed build/deploy on GitHub Actions (remote)"
 
 build:
 	docker buildx build -t forse --load .
@@ -27,3 +28,6 @@ open: build
 clean:
 	@docker ps -aq --filter ancestor=forse | xargs -r docker rm -f 2>/dev/null || true
 	@docker rmi forse 2>/dev/null || true
+
+retry:
+	gh run rerun $(shell gh run list --branch main --limit 1 --json databaseId --jq '.[0].databaseId') --failed
