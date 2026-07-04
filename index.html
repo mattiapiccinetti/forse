@@ -16,13 +16,11 @@
     main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     .footer { height: 10vh; display: table; font-size: 12px; }
     div.footer > p { display: table-cell; vertical-align: middle; }
-    #theme { position: fixed; top: 12px; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; }
-    #theme:hover { opacity: 1; }
-    #btn-linkedin, #btn-github { position: fixed; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; text-decoration: none; }
+    #theme, #btn-linkedin, #btn-github { position: fixed; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; min-width: 70px; text-align: center; box-sizing: content-box; color: var(--fg); text-decoration: none; }
+    #theme { top: 12px; }
     #btn-linkedin { top: 56px; }
     #btn-github { top: 100px; }
-    #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
-    #theme, #btn-linkedin, #btn-github { min-width: 70px; text-align: center; }
+    #theme:hover, #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
 </style>
 </head>
 <body>
