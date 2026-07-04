@@ -27,7 +27,7 @@
     .mbr { display: none; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
     .shake { animation: shake 0.35s ease; }
-    @media (max-width: 768px) { .mbr { display: block; } #copyright { font-size: 9px; } }
+    @media (max-width: 768px) { .mbr { display: block; } .sep { display: none; } #copyright { font-size: 9px; } }
     div.footer > p { margin: 0; width: auto; }
 </style>
 </head>
@@ -54,7 +54,7 @@
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
-        document.getElementById('copyright').innerHTML = '<span>&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse</span><br class="mbr"> &ndash;<br class="mbr"> <span>All Rights Reserved</span>';
+        document.getElementById('copyright').innerHTML = '<span>&copy; Copyright 2014&ndash;'+new Date().getFullYear()+' Forse</span><span class="sep"> &ndash; </span><br class="mbr"><span>All Rights Reserved</span>';
         const h = window.location.hash.slice(1);
         show(tips[h] !== undefined ? h : randHash());
         setDark(localStorage.getItem('theme') !== 'light');
