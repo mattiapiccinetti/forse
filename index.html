@@ -51,9 +51,9 @@
         setDark(localStorage.getItem('theme') !== 'light');
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
-        let startY = 0;
-        document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
-        document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randHash()); }, {passive: true});
+        let startX = 0, startY = 0;
+        document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive: true});
+        document.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - startX, dy = e.changedTouches[0].clientY - startY; if (Math.abs(dx) > 60 || Math.abs(dy) > 60) show(randHash()); }, {passive: true});
         themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
         ['btn-linkedin', 'btn-github'].forEach(id => {
             ['click', 'keypress'].forEach(evt => document.getElementById(id).addEventListener(evt, e => e.stopPropagation()));
