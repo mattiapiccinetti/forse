@@ -11,16 +11,17 @@
     :root { --fg: #333; --bg: #fff; }
     body.dark { --fg: #ccc; --bg: #111; }
     * { margin: 0 auto; width: 100%; font-family: 'IBM Plex Mono', monospace; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
-    html, body { overscroll-behavior: none; background: var(--bg); min-height: 100vh; }
-    #wrapper { height: 85vh; display: table; }
-    main#wrapper > a { display: table-cell; vertical-align: middle; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
+    html { height: -webkit-fill-available; overflow: hidden; }
+    body { overscroll-behavior: none; background: var(--bg); height: 100vh; height: -webkit-fill-available; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+    #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
+    main#wrapper > a { width: auto; font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; }
     #theme { position: fixed; top: 16px; right: 16px; width: auto; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); }
     #theme:hover { opacity: 1; }
     #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
     #copyright { letter-spacing: 1px; }
     #copyright span { opacity: 0.4; }
-    .footer { height: 10vh; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; }
+    .footer { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; padding: 16px 0; flex-shrink: 0; }
     .mbr { display: none; }
     @media (max-width: 480px) { .mbr { display: block; } #copyright { font-size: 10px; } }
     div.footer > p { margin: 0; width: auto; }
