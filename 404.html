@@ -1,1 +1,2 @@
-<!DOCTYPE html><html><script>var s=window.location.pathname.split('/').filter(Boolean),t=s[s.length-1];if(/^\d+$/.test(t))sessionStorage.setItem('tip',t);window.location.replace('/forse/');</script></html>
+<!DOCTYPE html><html><script>var s=window.location.pathname.split('/').filter(Boolean),t=s[s.length-1];if(/^\d+$/.test(t)){sessionStorage.setItem('tip',t);s.pop();window.location.replace(s.length?'/'+s.join('/')+'/':'/');}else{window.location.replace('/');}
+</script></html>
