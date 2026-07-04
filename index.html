@@ -18,10 +18,17 @@
     div.footer > p { display: table-cell; vertical-align: middle; }
     #theme { position: fixed; top: 12px; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; }
     #theme:hover { opacity: 1; }
+    #btn-linkedin, #btn-github { position: fixed; right: 12px; cursor: pointer; font-size: 12px; width: auto; margin: 0; background: none; border: 1px solid var(--fg); padding: 6px 14px; opacity: 0.4; letter-spacing: 1px; text-decoration: none; }
+    #btn-linkedin { top: 56px; }
+    #btn-github { top: 100px; }
+    #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
+    #theme, #btn-linkedin, #btn-github { min-width: 70px; text-align: center; }
 </style>
 </head>
 <body>
     <button id="theme"></button>
+    <a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">linkedin</a>
+    <a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">github</a>
     <main id="wrapper">
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
@@ -49,6 +56,9 @@
         document.addEventListener('touchstart', e => { startY = e.touches[0].clientY; }, {passive: true});
         document.addEventListener('touchend', e => { if (e.changedTouches[0].clientY - startY > 60) show(randIndex()); }, {passive: true});
         themeEl.addEventListener('click', e => { e.stopPropagation(); setDark(!document.body.classList.contains('dark')); });
+        ['btn-linkedin', 'btn-github'].forEach(id => {
+            ['click', 'keypress'].forEach(evt => document.getElementById(id).addEventListener(evt, e => e.stopPropagation()));
+        });
     </script>
 </body>
 </html>
