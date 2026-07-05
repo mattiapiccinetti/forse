@@ -20,6 +20,7 @@
     #theme:hover, #share:hover { opacity: 1; }
     #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 12px; letter-spacing: 1px; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
     #social { display: flex; align-items: center; justify-content: center; gap: 1ch; }
+    .pipe { width: auto; opacity: 0.4; }
     #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; width: auto; min-width: calc(8ch + 7px); }
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
     #btn-linkedin { text-align: right; }
@@ -44,7 +45,7 @@
         <a href="#" id="tip" rel="nofollow"></a>
     </main>
     <div class="footer">
-        <p id="social"><a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">linkedin</a>|<a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">github</a></p>
+        <p id="social"><a id="btn-linkedin" href="https://www.linkedin.com/in/mattiapiccinetti/" target="_blank" rel="noopener noreferrer">linkedin</a><span class="pipe">|</span><a id="btn-github" href="https://github.com/mattiapiccinetti/forse" target="_blank" rel="noopener noreferrer">github</a></p>
         <p id="copyright"></p>
     </div>
     <script>
