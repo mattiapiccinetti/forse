@@ -19,8 +19,11 @@
     #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: right; }
     #theme:hover, #share:hover { opacity: 1; }
     #toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); font-size: 12px; letter-spacing: 1px; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
-    #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; }
+    #social { display: flex; align-items: center; justify-content: center; }
+    #btn-linkedin, #btn-github { cursor: pointer; font-size: 12px; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-decoration: none; width: auto; min-width: calc(8ch + 7px); }
     #btn-linkedin:hover, #btn-github:hover { opacity: 1; }
+    #btn-linkedin { text-align: right; }
+    #btn-github { text-align: left; }
     #copyright { letter-spacing: 1px; }
     #copyright span { opacity: 0.4; }
     .footer { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; padding: 16px 0; flex-shrink: 0; }
