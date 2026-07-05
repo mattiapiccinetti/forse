@@ -17,6 +17,7 @@ build:
 	docker buildx build -t forse --load .
 
 run: build
+	@docker ps -q --filter "publish=$(PORT)" | xargs -r docker rm -f 2>/dev/null || true
 	docker run --rm -p $(PORT):80 forse
 
 open: build
