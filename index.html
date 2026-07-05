@@ -13,7 +13,7 @@
     * { margin: 0 auto; width: 100%; font-family: 'IBM Plex Mono', monospace; text-align: center; color: var(--fg); touch-action: manipulation; transition: color 0.3s, background 0.3s; }
     html { height: -webkit-fill-available; overflow: hidden; }
     body { overscroll-behavior: none; background: var(--bg); height: 100vh; height: -webkit-fill-available; height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
-    #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; }
+    #wrapper { flex: 1; display: flex; align-items: center; justify-content: center; overflow: hidden; }
     main#wrapper > a { width: auto; max-width: calc(100% - 48px); font-size: 22px; font-weight: bold; text-decoration: none; transition: opacity 0.2s, color 0.3s; word-break: break-word; }
     #controls { position: fixed; top: 16px; right: 16px; width: auto; display: flex; flex-direction: column; gap: 8px; align-items: stretch; }
     #theme, #share { width: 100%; pointer-events: auto; cursor: pointer; font-size: 12px; background: none; border: none; padding: 4px 8px; margin: 0; opacity: 0.4; letter-spacing: 1px; color: var(--fg); text-align: right; }
@@ -31,6 +31,22 @@
     .mbr { display: none; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
     .shake { animation: shake 0.35s ease; }
+    @keyframes exit-left  { from{transform:translateX(0)} to{transform:translateX(-110vw)} }
+    @keyframes exit-right { from{transform:translateX(0)} to{transform:translateX(110vw)} }
+    @keyframes exit-up    { from{transform:translateY(0)} to{transform:translateY(-110vh)} }
+    @keyframes exit-down  { from{transform:translateY(0)} to{transform:translateY(110vh)} }
+    @keyframes enter-from-right  { from{transform:translateX(110vw)}  to{transform:translateX(0)} }
+    @keyframes enter-from-left   { from{transform:translateX(-110vw)} to{transform:translateX(0)} }
+    @keyframes enter-from-bottom { from{transform:translateY(110vh)}  to{transform:translateY(0)} }
+    @keyframes enter-from-top    { from{transform:translateY(-110vh)} to{transform:translateY(0)} }
+    .sl-exit-l { animation: exit-left  .25s ease forwards; }
+    .sl-exit-r { animation: exit-right .25s ease forwards; }
+    .sl-exit-u { animation: exit-up    .25s ease forwards; }
+    .sl-exit-d { animation: exit-down  .25s ease forwards; }
+    .sl-from-r { animation: enter-from-right  .25s ease forwards; }
+    .sl-from-l { animation: enter-from-left   .25s ease forwards; }
+    .sl-from-b { animation: enter-from-bottom .25s ease forwards; }
+    .sl-from-t { animation: enter-from-top    .25s ease forwards; }
     @media (max-width: 768px) { .mbr { display: block; } .sep { display: none; } #copyright { font-size: 9px; } }
     div.footer > p { margin: 0; width: auto; }
 </style>
@@ -54,7 +70,9 @@
         const tip = document.getElementById('tip');
         const themeEl = document.getElementById('theme');
         let currentHash = '';
-        const show = h => { currentHash = h; tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; }, 200); };
+        const slides = { right:{exit:'sl-exit-l',enter:'sl-from-r'}, left:{exit:'sl-exit-r',enter:'sl-from-l'}, down:{exit:'sl-exit-u',enter:'sl-from-b'}, up:{exit:'sl-exit-d',enter:'sl-from-t'} };
+        let busy = false;
+        const show = (h, dir) => { if (busy) return; busy = true; currentHash = h; if (!dir) { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; busy=false; }, 200); return; } const {exit,enter}=slides[dir]; tip.classList.add(exit); setTimeout(()=>{ tip.classList.remove(exit); tip.innerHTML=tips[h]; tip.classList.add(enter); tip.addEventListener('animationend',()=>{ tip.classList.remove(enter); busy=false; },{once:true}); }, 250); };
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
@@ -64,9 +82,10 @@
         setDark(localStorage.getItem('theme') !== 'light');
         document.addEventListener('click', next);
         document.addEventListener('keypress', next);
+        document.addEventListener('keydown', e => { const dir={ArrowRight:'right',ArrowLeft:'left',ArrowUp:'up',ArrowDown:'down'}[e.key]; if (dir) { e.preventDefault(); show(randHash(), dir); } });
         let startX = 0, startY = 0;
         document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY; }, {passive: true});
-        document.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - startX, dy = e.changedTouches[0].clientY - startY; if (Math.abs(dx) > 60 || Math.abs(dy) > 60) show(randHash()); }, {passive: true});
+        document.addEventListener('touchend', e => { const dx=e.changedTouches[0].clientX-startX, dy=e.changedTouches[0].clientY-startY, adx=Math.abs(dx), ady=Math.abs(dy); if (adx<60 && ady<60) return; show(randHash(), adx>ady ? (dx<0?'right':'left') : (dy<0?'down':'up')); }, {passive: true});
         themeEl.addEventListener('click', e => { e.stopPropagation(); haptic(); setDark(!document.body.classList.contains('dark')); themeEl.blur(); });
         const shareEl = document.getElementById('share');
         const toastEl = document.getElementById('toast');
