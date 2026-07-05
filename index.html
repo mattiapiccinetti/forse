@@ -91,7 +91,9 @@
         const toastEl = document.getElementById('toast');
         let toastTimer;
         const haptic = (ms = 10) => navigator.vibrate?.(ms);
-        shareEl.addEventListener('click', e => { e.stopPropagation(); haptic(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); shareEl.blur(); tip.classList.remove('shake'); void tip.offsetWidth; tip.classList.add('shake'); });
+        const copy = () => { haptic(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); tip.classList.remove('shake'); void tip.offsetWidth; tip.classList.add('shake'); };
+        shareEl.addEventListener('click', e => { e.stopPropagation(); copy(); shareEl.blur(); });
+        tip.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); copy(); });
         ['btn-linkedin', 'btn-github'].forEach(id => {
             ['click', 'keypress'].forEach(evt => document.getElementById(id).addEventListener(evt, e => e.stopPropagation()));
         });
