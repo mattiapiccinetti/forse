@@ -30,7 +30,8 @@
     .footer { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; font-size: 12px; padding: 16px 0; flex-shrink: 0; }
     .mbr { display: none; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)} 60%{transform:translateX(-4px)} 80%{transform:translateX(4px)} }
-    .shake { animation: shake 0.35s ease; }
+    @keyframes blr   { 0%,100%{filter:blur(0)} 50%{filter:blur(4px)} }
+    .blrshk { animation: shake 0.4s ease, blr 0.4s ease; }
     @keyframes exit-left  { from{transform:translateX(0)} to{transform:translateX(-110vw)} }
     @keyframes exit-right { from{transform:translateX(0)} to{transform:translateX(110vw)} }
     @keyframes exit-up    { from{transform:translateY(0)} to{transform:translateY(-110vh)} }
@@ -72,7 +73,7 @@
         let currentHash = '';
         const slides = { right:{exit:'sl-exit-l',enter:'sl-from-r'}, left:{exit:'sl-exit-r',enter:'sl-from-l'}, down:{exit:'sl-exit-u',enter:'sl-from-b'}, up:{exit:'sl-exit-d',enter:'sl-from-t'} };
         let busy = false;
-        const show = (h, dir) => { if (busy) return; busy = true; tip.classList.remove('shake'); currentHash = h; if (!dir) { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; busy=false; }, 200); return; } const {exit,enter}=slides[dir]; tip.classList.add(exit); setTimeout(()=>{ tip.classList.remove(exit); tip.innerHTML=tips[h]; tip.classList.add(enter); tip.addEventListener('animationend',()=>{ tip.classList.remove(enter); busy=false; },{once:true}); }, 250); };
+        const show = (h, dir) => { if (busy) return; busy = true; tip.classList.remove('blrshk'); currentHash = h; if (!dir) { tip.style.opacity=0; setTimeout(()=>{ tip.innerHTML=tips[h]; tip.style.opacity=1; busy=false; }, 200); return; } const {exit,enter}=slides[dir]; tip.classList.add(exit); setTimeout(()=>{ tip.classList.remove(exit); tip.innerHTML=tips[h]; tip.classList.add(enter); tip.addEventListener('animationend',()=>{ tip.classList.remove(enter); busy=false; },{once:true}); }, 250); };
         const randHash = () => hashes[Math.floor(Math.random()*hashes.length)];
         const next = e => { e.preventDefault(); show(randHash()); };
         const setDark = dark => { document.body.classList.toggle('dark', dark); themeEl.textContent = dark ? '[ light ]' : '[ dark ]'; localStorage.setItem('theme', dark ? 'dark' : 'light'); };
@@ -91,7 +92,7 @@
         const toastEl = document.getElementById('toast');
         let toastTimer;
         const haptic = (ms = 10) => navigator.vibrate?.(ms);
-        const copy = () => { haptic(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); tip.classList.remove('shake'); void tip.offsetWidth; tip.classList.add('shake'); };
+        const copy = () => { haptic(); navigator.clipboard.writeText('https://mattiapiccinetti.github.io/forse/#' + currentHash); toastEl.style.opacity = 1; clearTimeout(toastTimer); toastTimer = setTimeout(() => { toastEl.style.opacity = 0; }, 1500); tip.classList.remove('blrshk'); void tip.offsetWidth; tip.classList.add('blrshk'); tip.addEventListener('animationend', () => tip.classList.remove('blrshk'), {once:true}); };
         shareEl.addEventListener('click', e => { e.stopPropagation(); copy(); shareEl.blur(); });
         tip.addEventListener('click', e => { e.stopPropagation(); e.preventDefault(); copy(); });
         ['btn-linkedin', 'btn-github'].forEach(id => {
